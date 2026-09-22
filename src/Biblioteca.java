@@ -36,9 +36,11 @@ public class Biblioteca {
 
         ArrayList<Libro> resultado = new ArrayList<>();
 
+        autor = autor.trim();
+
         for (Libro libro : libros) {
 
-            if (libro.getAutor().equals(autor)) {
+            if (libro.getAutor().trim().equalsIgnoreCase(autor)) {
                 resultado.add(libro);
             }
         }
