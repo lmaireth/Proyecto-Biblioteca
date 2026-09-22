@@ -1,6 +1,6 @@
 📚 Sistema de Gestión de Biblioteca
 
-	Aplicación de escritorio desarrollada en Java, aplicando conceptos de Programación Orientada a Objetos (POO) y Java Swing.
+	Aplicación de escritorio desarrollada en Java, aplicando conceptos de Programación Orientada a Objetos (POO) y Java Swing
 
 👩‍💻 Integrantes
 
