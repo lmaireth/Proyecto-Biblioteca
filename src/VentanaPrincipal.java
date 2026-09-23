@@ -88,7 +88,7 @@ JPanel panelFiltro = new JPanel(
 
     lblCatalogo = new JLabel("Catálogo de libros");
     lblCatalogo.setFont(new Font("Arial", Font.BOLD, 18));
-        lblCatalogo.setHorizontalAlignment(SwingConstants.CENTER);
+    lblCatalogo.setHorizontalAlignment(SwingConstants.CENTER);
 
 
 JPanel panelCatalogo = new JPanel(new BorderLayout());
@@ -99,15 +99,41 @@ JPanel panelCatalogo = new JPanel(new BorderLayout());
 
 add(panelCatalogo, BorderLayout.CENTER);
 
-    lblCatalogo = new JLabel("Catálogo de libros");
-    lblCatalogo.setFont(new Font("Arial", Font.BOLD, 18));
-        lblCatalogo.setHorizontalAlignment(SwingConstants.CENTER);
 
+btnFiltrar.addActionListener(e -> {
 
-JPanel panelCatalogo = new JPanel(new BorderLayout());
+String autor = txtBuscarAutor.getText().trim();
 
-    panelCatalogo.add(lblCatalogo, BorderLayout.NORTH);
-    panelCatalogo.add(scrollTabla, BorderLayout.CENTER);
-    panelCatalogo.add(panelFiltro, BorderLayout.SOUTH);
+    modeloTabla.setRowCount(0);
 
-add(panelCatalogo, BorderLayout.CENTER);
+    for (Libro libro : biblioteca.filtrarPorAutor(autor)) {
+
+        modeloTabla.addRow(new Object[]{
+    libro.getCodigo(),
+            libro.getTitulo(),
+            libro.getAutor(),
+            libro.getGenero(),
+            libro.getAñoPublicacion(),
+            libro.getCopiasDisponibles()
+});
+        }
+        });
+
+        btnFiltrar.addActionListener(e -> {
+
+String autor = txtBuscarAutor.getText().trim();
+
+    modeloTabla.setRowCount(0);
+
+    for (Libro libro : biblioteca.filtrarPorAutor(autor)) {
+
+        modeloTabla.addRow(new Object[]{
+    libro.getCodigo(),
+            libro.getTitulo(),
+            libro.getAutor(),
+            libro.getGenero(),
+            libro.getAñoPublicacion(),
+            libro.getCopiasDisponibles()
+});
+        }
+        });
