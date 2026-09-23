@@ -119,16 +119,15 @@ String autor = txtBuscarAutor.getText().trim();
         }
         });
 
-        btnFiltrar.addActionListener(e -> {
 
-String autor = txtBuscarAutor.getText().trim();
+        btnMostrarTodos.addActionListener(e -> {
 
-    modeloTabla.setRowCount(0);
+        modeloTabla.setRowCount(0);
 
-    for (Libro libro : biblioteca.filtrarPorAutor(autor)) {
+    for (Libro libro : biblioteca.obtenerTodos()) {
 
         modeloTabla.addRow(new Object[]{
-    libro.getCodigo(),
+            libro.getCodigo(),
             libro.getTitulo(),
             libro.getAutor(),
             libro.getGenero(),
@@ -137,3 +136,42 @@ String autor = txtBuscarAutor.getText().trim();
 });
         }
         });
+
+        btnEliminar.addActionListener(e -> {
+
+Libro libro = obtenerLibroSeleccionado();
+
+    if (libro != null) {
+
+int respuesta = JOptionPane.showConfirmDialog(
+        this,
+        "¿Está seguro de eliminar el libro?\n"
+                + libro.getTitulo(),
+        "Confirmar eliminación",
+        JOptionPane.YES_NO_OPTION
+);
+
+        if (respuesta == JOptionPane.YES_OPTION) {
+
+        biblioteca.eliminarLibro(libro);
+
+            modeloTabla.removeRow(
+        tablaLibros.getSelectedRow()
+            );
+
+            JOptionPane.showMessageDialog(
+                    this,
+                            "Libro eliminado correctamente"
+);
+        }
+
+    } else {
+
+            JOptionPane.showMessageDialog(
+                this,
+                        "Seleccione un libro para eliminar"
+);
+    }
+        });
+
+        
