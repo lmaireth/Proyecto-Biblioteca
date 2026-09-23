@@ -47,4 +47,20 @@ public class Libro {
             return genero;
         }
 
+        public int getAñoPublicacion() {
+            return añoPublicacion;
+        }
+
+        public void setAñoPublicacion(int añoPublicacion) {
+            this.añoPublicacion = añoPublicacion;
+        }
+
+        public int getCopiasDisponibles() {
+            return copiasDisponibles;
+        }
+
+        public void setCopiasDisponibles(int copiasDisponibles) {
+            this.copiasDisponibles = copiasDisponibles;
+        }
+
 }
