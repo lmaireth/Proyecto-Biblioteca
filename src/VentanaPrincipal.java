@@ -1,5 +1,4 @@
 import javax.swing.JFrame;
-
 public class VentanaPrincipal extends JFrame {
 
     private Biblioteca biblioteca;
@@ -14,6 +13,7 @@ public class VentanaPrincipal extends JFrame {
         setLocationRelativeTo(null);
     }
 }
+
 String[] columnas = {
         "Código",
         "Título",
@@ -42,3 +42,22 @@ tablaLibros = new JTable(modeloTabla);
 scrollTabla = new JScrollPane(tablaLibros);
 
 add(scrollTabla);
+
+
+private JTextField txtBuscarAutor;
+
+txtBuscarAutor = new JTextField(15);
+
+btnFiltrar = new JButton("Filtrar");
+btnMostrarTodos = new JButton("Mostrar todos");
+btnEliminar = new JButton("Eliminar libro");
+
+JPanel panelFiltro = new JPanel(
+        new FlowLayout(FlowLayout.CENTER)
+);
+
+    panelFiltro.add(new JLabel("Buscar por autor:"));
+    panelFiltro.add(txtBuscarAutor);
+    panelFiltro.add(btnFiltrar);
+    panelFiltro.add(btnMostrarTodos);
+    panelFiltro.add(btnEliminar);
