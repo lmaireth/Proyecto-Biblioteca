@@ -174,4 +174,22 @@ int respuesta = JOptionPane.showConfirmDialog(
     }
         });
 
-        
+btnAgregar = new JButton("Agregar libro");
+
+JPanel panelBotonAgregar = new JPanel(
+        new FlowLayout(FlowLayout.RIGHT)
+);
+
+    panelBotonAgregar.add(btnAgregar);
+
+
+// Panel superior
+JPanel panelSuperior = new JPanel(
+        new BorderLayout(5, 5)
+);
+
+    panelSuperior.add(lblAgregar, BorderLayout.NORTH);
+    panelSuperior.add(panelFormulario, BorderLayout.CENTER);
+    panelSuperior.add(panelBotonAgregar, BorderLayout.SOUTH);
+
+add(panelSuperior, BorderLayout.NORTH);
