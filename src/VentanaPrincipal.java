@@ -1,5 +1,6 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 
 public class VentanaPrincipal extends JFrame {
 
@@ -36,64 +37,66 @@ public class VentanaPrincipal extends JFrame {
         setLocationRelativeTo(null);
 
 
-String[] columnas = {
-        "Código",
-        "Título",
-        "Autor",
-        "Género",
-        "Año",
-        "Copias"
-};
+        String[] columnas = {
+                "Código",
+                "Título",
+                "Autor",
+                "Género",
+                "Año",
+                "Copias"
+        };
 
-modeloTabla = new DefaultTableModel(columnas, 0);
-tablaLibros = new JTable(modeloTabla);
-
-
-    for (Libro libro : biblioteca.obtenerTodos()) {
-
-        modeloTabla.addRow(new Object[]{
-            libro.getCodigo(),
-            libro.getTitulo(),
-            libro.getAutor(),
-            libro.getGenero(),
-            libro.getAñoPublicacion(),
-            libro.getCopiasDisponibles()});
-    }
-
-scrollTabla = new JScrollPane(tablaLibros);
-
-add(scrollTabla);
+        modeloTabla = new DefaultTableModel(columnas, 0);
+        tablaLibros = new JTable(modeloTabla);
 
 
-txtBuscarAutor = new JTextField(15);
+        for (Libro libro : biblioteca.obtenerTodos()) {
 
-btnFiltrar = new JButton("Filtrar");
-btnMostrarTodos = new JButton("Mostrar todos");
-btnEliminar = new JButton("Eliminar libro");
+                modeloTabla.addRow(new Object[]{
+                    libro.getCodigo(),
+                    libro.getTitulo(),
+                    libro.getAutor(),
+                    libro.getGenero(),
+                    libro.getAñoPublicacion(),
+                    libro.getCopiasDisponibles()});
+            }
 
-JPanel panelFiltro = new JPanel(
-        new FlowLayout(FlowLayout.CENTER)
-);
-
-    panelFiltro.add(new JLabel("Buscar por autor:"));
-    panelFiltro.add(txtBuscarAutor);
-    panelFiltro.add(btnFiltrar);
-    panelFiltro.add(btnMostrarTodos);
-    panelFiltro.add(btnEliminar);
+        scrollTabla = new JScrollPane(tablaLibros);
 
 
-    lblCatalogo = new JLabel("Catálogo de libros");
-    lblCatalogo.setFont(new Font("Arial", Font.BOLD, 18));
-    lblCatalogo.setHorizontalAlignment(SwingConstants.CENTER);
+        txtBuscarAutor = new JTextField(15);
+
+        btnFiltrar = new JButton("Filtrar");
+        btnMostrarTodos = new JButton("Mostrar todos");
+        btnEliminar = new JButton("Eliminar libro");
+
+        JPanel panelFiltro = new JPanel(
+                new FlowLayout(FlowLayout.CENTER)
+        );
+
+        panelFiltro.add(new JLabel("Buscar por autor:"));
+        panelFiltro.add(txtBuscarAutor);
+        panelFiltro.add(btnFiltrar);
+        panelFiltro.add(btnMostrarTodos);
+        panelFiltro.add(btnEliminar);
 
 
-JPanel panelCatalogo = new JPanel(new BorderLayout());
+        lblCatalogo = new JLabel("Catálogo de libros");
+        lblCatalogo.setFont(new Font("Arial", Font.BOLD, 18));
+        lblCatalogo.setHorizontalAlignment(SwingConstants.CENTER);
 
-    panelCatalogo.add(lblCatalogo, BorderLayout.NORTH);
-    panelCatalogo.add(scrollTabla, BorderLayout.CENTER);
-    panelCatalogo.add(panelFiltro, BorderLayout.SOUTH);
 
-add(panelCatalogo, BorderLayout.CENTER);
+        JPanel panelCatalogo = new JPanel(new BorderLayout());
+
+        panelCatalogo.add(lblCatalogo, BorderLayout.NORTH);
+        panelCatalogo.add(scrollTabla, BorderLayout.CENTER);
+        panelCatalogo.add(panelFiltro, BorderLayout.SOUTH);
+
+        add(panelCatalogo, BorderLayout.CENTER);
+
+        lblAgregar = new JLabel("Agregar nuevo libro");
+        lblAgregar.setFont(new Font("Arial", Font.BOLD, 14));
+        lblAgregar.setHorizontalAlignment(SwingConstants.LEFT);
 
         JPanel panelFormulario = new JPanel(
                 new GridLayout(2, 6, 5, 5)
@@ -120,31 +123,45 @@ add(panelCatalogo, BorderLayout.CENTER);
         panelFormulario.add(txtAño);
         panelFormulario.add(txtCopias);
 
-btnFiltrar.addActionListener(e -> {
+        btnAgregar = new JButton("Agregar libro");
 
-String autor = txtBuscarAutor.getText().trim();
+        JPanel panelBotonAgregar = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
-    modeloTabla.setRowCount(0);
+        panelBotonAgregar.add(btnAgregar);
 
-    for (Libro libro : biblioteca.filtrarPorAutor(autor)) {
+        JPanel panelSuperior = new JPanel(new BorderLayout(5, 5));
 
-        modeloTabla.addRow(new Object[]{
-    libro.getCodigo(),
-            libro.getTitulo(),
-            libro.getAutor(),
-            libro.getGenero(),
-            libro.getAñoPublicacion(),
-            libro.getCopiasDisponibles()
-});
+        panelSuperior.add(lblAgregar, BorderLayout.NORTH);
+        panelSuperior.add(panelFormulario, BorderLayout.CENTER);
+        panelSuperior.add(panelBotonAgregar, BorderLayout.SOUTH);
+
+        add(panelSuperior, BorderLayout.NORTH);
+
+    btnFiltrar.addActionListener(e -> {
+
+        String autor = txtBuscarAutor.getText().trim();
+
+        modeloTabla.setRowCount(0);
+
+        for (Libro libro : biblioteca.filtrarPorAutor(autor)) {
+
+            modeloTabla.addRow(new Object[]{
+                libro.getCodigo(),
+                libro.getTitulo(),
+                libro.getAutor(),
+                libro.getGenero(),
+                libro.getAñoPublicacion(),
+                libro.getCopiasDisponibles()
+            });
         }
-        });
+    });
 
 
         btnMostrarTodos.addActionListener(e -> {
 
         modeloTabla.setRowCount(0);
 
-    for (Libro libro : biblioteca.obtenerTodos()) {
+        for (Libro libro : biblioteca.obtenerTodos()) {
 
         modeloTabla.addRow(new Object[]{
             libro.getCodigo(),
@@ -153,63 +170,183 @@ String autor = txtBuscarAutor.getText().trim();
             libro.getGenero(),
             libro.getAñoPublicacion(),
             libro.getCopiasDisponibles()
-});
-        }
         });
+    }
+});
 
         btnEliminar.addActionListener(e -> {
 
-Libro libro = obtenerLibroSeleccionado();
+        Libro libro = obtenerLibroSeleccionado();
 
-    if (libro != null) {
+        if (libro != null) {
 
-int respuesta = JOptionPane.showConfirmDialog(
-        this,
-        "¿Está seguro de eliminar el libro?\n"
-                + libro.getTitulo(),
-        "Confirmar eliminación",
-        JOptionPane.YES_NO_OPTION
-);
+            int respuesta = JOptionPane.showConfirmDialog(
+            this,
+            "¿Está seguro de eliminar el libro? \n"
+                    +libro.getTitulo(),
+            "Confirmar eliminación",
+            JOptionPane.YES_NO_OPTION
+    );
 
         if (respuesta == JOptionPane.YES_OPTION) {
 
-        biblioteca.eliminarLibro(libro);
+            biblioteca.eliminarLibro(libro);
 
-            modeloTabla.removeRow(
-        tablaLibros.getSelectedRow()
-            );
+                modeloTabla.removeRow(
+            tablaLibros.getSelectedRow()
+                );
 
-            JOptionPane.showMessageDialog(
-                    this,
-                            "Libro eliminado correctamente"
-);
-        }
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Libro eliminado correctamente"
+    );
+            }
 
     } else {
 
             JOptionPane.showMessageDialog(
                 this,
-                        "Seleccione un libro para eliminar"
-);
-    }
+                "Seleccione un libro para eliminar"
+            );
+        }
+    });
+
+        btnAgregar.addActionListener(e -> {
+
+            String titulo = txtTitulo.getText().trim();
+            String autor = txtAutor.getText().trim();
+            String codigo = txtCodigo.getText().trim();
+            String genero = txtGenero.getText().trim();
+            String textoAño = txtAño.getText().trim();
+            String textoCopias = txtCopias.getText().trim();
+
+
+            if (titulo.isEmpty()
+                    || autor.isEmpty()
+                    || codigo.isEmpty()
+                    || genero.isEmpty()
+                    || textoAño.isEmpty()
+                    || textoCopias.isEmpty()) {
+
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Todos los campos son obligatorios"
+                );
+
+                return;
+            }
+
+
+            int año;
+            int copias;
+
+
+            try {
+
+                año = Integer.parseInt(textoAño);
+                copias = Integer.parseInt(textoCopias);
+
+            } catch (NumberFormatException ex) {
+
+                JOptionPane.showMessageDialog(
+                        this,
+                        "El año y las copias deben ser números"
+                );
+
+                return;
+            }
+
+
+            int añoActual = java.time.Year.now().getValue();
+
+            if (año > añoActual) {
+
+                JOptionPane.showMessageDialog(
+                        this,
+                        "El año no puede ser mayor al año actual: "
+                            + añoActual
+                );
+
+                return;
+            }
+
+
+            if (copias < 0) {
+
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Las copias disponibles no pueden ser negativas"
+                );
+
+                return;
+            }
+
+
+            Libro nuevoLibro = new Libro(
+                    titulo,
+                    autor,
+                    codigo,
+                    genero,
+                    año,
+                    copias
+            );
+
+
+            boolean agregado = biblioteca.agregarLibro(nuevoLibro);
+
+            if (agregado) {
+
+                String autorBuscado = txtBuscarAutor.getText().trim();
+
+                if (autorBuscado.isEmpty()
+                        || nuevoLibro.getAutor()
+                        .trim()
+                        .equalsIgnoreCase(autorBuscado)) {
+
+                    modeloTabla.addRow(new Object[]{
+                            nuevoLibro.getCodigo(),
+                            nuevoLibro.getTitulo(),
+                            nuevoLibro.getAutor(),
+                            nuevoLibro.getGenero(),
+                            nuevoLibro.getAñoPublicacion(),
+                            nuevoLibro.getCopiasDisponibles()
+                    });
+                }
+
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Libro agregado correctamente"
+                );
+
+            } else {
+
+                JOptionPane.showMessageDialog(
+                        this,
+                        "El código ya existe"
+                );
+            }
         });
+    }
 
-btnAgregar = new JButton("Agregar libro");
+    private Libro obtenerLibroSeleccionado() {
 
-JPanel panelBotonAgregar = new JPanel(
-        new FlowLayout(FlowLayout.RIGHT)
-);
+        int fila = tablaLibros.getSelectedRow();
 
-    panelBotonAgregar.add(btnAgregar);
+        if (fila == -1) {
+            return null;
+        }
 
+        String codigo = modeloTabla
+                .getValueAt(fila, 0)
+                .toString();
 
-// Panel superior
-JPanel panelSuperior = new JPanel(
-        new BorderLayout(5, 5)
-);
+        for (Libro libro : biblioteca.obtenerTodos()) {
 
-    panelSuperior.add(lblAgregar, BorderLayout.NORTH);
-    panelSuperior.add(panelFormulario, BorderLayout.CENTER);
-    panelSuperior.add(panelBotonAgregar, BorderLayout.SOUTH);
+            if (libro.getCodigo().equals(codigo)) {
+                return libro;
+            }
+        }
 
-add(panelSuperior, BorderLayout.NORTH);
+        return null;
+    }
+}
