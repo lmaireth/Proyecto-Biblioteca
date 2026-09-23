@@ -34,8 +34,7 @@ public class VentanaPrincipal extends JFrame {
         setSize(800, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-    }
-}
+
 
 String[] columnas = {
         "Código",
@@ -58,16 +57,13 @@ tablaLibros = new JTable(modeloTabla);
             libro.getAutor(),
             libro.getGenero(),
             libro.getAñoPublicacion(),
-            libro.getCopiasDisponibles()
-        });
+            libro.getCopiasDisponibles()});
     }
 
 scrollTabla = new JScrollPane(tablaLibros);
 
 add(scrollTabla);
 
-
-private JTextField txtBuscarAutor;
 
 txtBuscarAutor = new JTextField(15);
 
@@ -99,6 +95,30 @@ JPanel panelCatalogo = new JPanel(new BorderLayout());
 
 add(panelCatalogo, BorderLayout.CENTER);
 
+        JPanel panelFormulario = new JPanel(
+                new GridLayout(2, 6, 5, 5)
+        );
+
+        txtTitulo = new JTextField();
+        txtAutor = new JTextField();
+        txtCodigo = new JTextField();
+        txtGenero = new JTextField();
+        txtAño = new JTextField();
+        txtCopias = new JTextField();
+
+        panelFormulario.add(new JLabel("Título"));
+        panelFormulario.add(new JLabel("Autor"));
+        panelFormulario.add(new JLabel("Código"));
+        panelFormulario.add(new JLabel("Género"));
+        panelFormulario.add(new JLabel("Año"));
+        panelFormulario.add(new JLabel("Copias"));
+
+        panelFormulario.add(txtTitulo);
+        panelFormulario.add(txtAutor);
+        panelFormulario.add(txtCodigo);
+        panelFormulario.add(txtGenero);
+        panelFormulario.add(txtAño);
+        panelFormulario.add(txtCopias);
 
 btnFiltrar.addActionListener(e -> {
 
