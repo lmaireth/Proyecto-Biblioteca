@@ -1,7 +1,30 @@
-import javax.swing.JFrame;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
 public class VentanaPrincipal extends JFrame {
 
     private Biblioteca biblioteca;
+
+    private JTable tablaLibros;
+    private JScrollPane scrollTabla;
+    private DefaultTableModel modeloTabla;
+
+    private JButton btnAgregar;
+    private JButton btnFiltrar;
+    private JButton btnMostrarTodos;
+    private JButton btnEliminar;
+
+    private JTextField txtTitulo;
+    private JTextField txtAutor;
+    private JTextField txtCodigo;
+    private JTextField txtGenero;
+    private JTextField txtAño;
+    private JTextField txtCopias;
+
+    private JTextField txtBuscarAutor;
+
+    private JLabel lblCatalogo;
+    private JLabel lblAgregar;
 
     public VentanaPrincipal(Biblioteca biblioteca) {
 
@@ -61,3 +84,30 @@ JPanel panelFiltro = new JPanel(
     panelFiltro.add(btnFiltrar);
     panelFiltro.add(btnMostrarTodos);
     panelFiltro.add(btnEliminar);
+
+
+    lblCatalogo = new JLabel("Catálogo de libros");
+    lblCatalogo.setFont(new Font("Arial", Font.BOLD, 18));
+        lblCatalogo.setHorizontalAlignment(SwingConstants.CENTER);
+
+
+JPanel panelCatalogo = new JPanel(new BorderLayout());
+
+    panelCatalogo.add(lblCatalogo, BorderLayout.NORTH);
+    panelCatalogo.add(scrollTabla, BorderLayout.CENTER);
+    panelCatalogo.add(panelFiltro, BorderLayout.SOUTH);
+
+add(panelCatalogo, BorderLayout.CENTER);
+
+    lblCatalogo = new JLabel("Catálogo de libros");
+    lblCatalogo.setFont(new Font("Arial", Font.BOLD, 18));
+        lblCatalogo.setHorizontalAlignment(SwingConstants.CENTER);
+
+
+JPanel panelCatalogo = new JPanel(new BorderLayout());
+
+    panelCatalogo.add(lblCatalogo, BorderLayout.NORTH);
+    panelCatalogo.add(scrollTabla, BorderLayout.CENTER);
+    panelCatalogo.add(panelFiltro, BorderLayout.SOUTH);
+
+add(panelCatalogo, BorderLayout.CENTER);
