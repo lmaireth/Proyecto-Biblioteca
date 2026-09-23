@@ -46,10 +46,6 @@ public class Libro {
         return genero;
     }
 
-    public void setGenero(String genero) {
-        this.genero = genero;
-    }
-
     public int getAñoPublicacion() {
         return añoPublicacion;
     }
